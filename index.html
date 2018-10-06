@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .container {
+            width: 600px;
+            border: 1px solid black;
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+<h1>Inicio de sesión</h1>
+<section class="container">
+    <label for="user">User</label>
+    <input id="user" type="text" placeholder="Usuario" class="slide-up">
+    <label for="pass">Password</label>
+    <input id="pass" type="password" placeholder="Contraseña" class="slide-up">
+    <button onclick="logIn()">Iniciar sesión</button>
+</section>
+<script>
+    function logIn() {
+        const username = getValue('#user');
+        const password = getValue('#pass');
+        const user = {username, password};
+        console.log(user);
+    }
+
+    function getValue(query) {
+        return document.querySelector(query).value;
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .container {
+            width: 600px;
+            border: 1px solid black;
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
+        .blue {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<h1>Log In</h1>
+<section class="container">
+    <input id="user" type="text" placeholder="Username" class="slide-up">
+    <input id="pass" type="password" placeholder="Password" class="slide-up">
+    <button id="logInButton">Log In</button>
+    <button id="logOutButton" hidden>Log Out</button>
+
+    <div id="loggedPage" hidden>
+        <h2>You are logged !</h2>
+    </div>
+</section>
+<script>
+    const users = [
+        {
+            username: 'josue',
+            password: '123'
+        },
+        {
+            username: 'alan',
+            password: '#@1'
+        },
+        {
+            username: 'edgar',
+            password: '8669'
+        }];
+    const getValue = query => document.querySelector(query).value;
+    const getNode = query => document.querySelector(query);
+    const getUser = () => {
+        return {
+            username: getValue('#user'),
+            password: getValue('#pass')
+        };
+    };
+    const logIn = () => {
+        let logged = false;
+        const user = getUser();
+        for (const iteratorUser of users) {
+            if (user.username === iteratorUser.username && user.password === iteratorUser.password) {
+                logged = true;
+            }
+        }
+        return logged;
+    };
+    const cleanInputs = () => {
+        getNode('#user').value = '';
+        getNode('#pass').value = '';
+    };
+
+    getNode('#logInButton')
+    .addEventListener('click', () => {
+        if (logIn()) {
+            getNode('#loggedPage').removeAttribute('hidden');
+            getNode('#user').setAttribute('hidden', '');
+            getNode('#pass').setAttribute('hidden', '');
+            getNode('#logInButton').setAttribute('hidden', '');
+            getNode('#logOutButton').removeAttribute('hidden');
+            cleanInputs();
+            getNode('#loggedPage h2').setAttribute('class', 'blue');
+        } else {
+            alert('User or password invalid !');
+        }
+    });
+
+    getNode('#logOutButton')
+        .addEventListener('click', () => {
+            getNode('#loggedPage').setAttribute('hidden', '');
+            getNode('#user').removeAttribute('hidden');
+            getNode('#pass').removeAttribute('hidden');
+            getNode('#logInButton').removeAttribute('hidden');
+            getNode('#logOutButton').setAttribute('hidden', '');
+        });
+
+
+</script>
+</body>
+</html>
